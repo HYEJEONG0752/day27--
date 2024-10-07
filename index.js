@@ -48,25 +48,25 @@
     자바스크립트에서는 메서드 오버라이딩을 통해 다형성을 구현할 수 있습니다.
     이는 자식 클래스에서 부모 클래스의 메서드를 재정의하는 것을 의미합니다.
     */
-    class Animal {
+    class Animal1 {
         makeSound() {
             console.log("Some sound...");
         }
     }
 
-    class Cat extends Animal {
+    class Cat1 extends Animal1 {
         makeSound() {
             console.log("야옹");
         }
     }
 
-    class Dog extends Animal {
+    class Dog1 extends Animal1 {
         makeSound() {
             console.log("멍멍");
         }
     }
 
-    const animals = [new Cat(), new Dog()];
+    const animals = [new Cat1(), new Dog1()];
     animals.forEach(animal => animal.makeSound());
 
 // 4. 추상화와 인터페이스
@@ -75,9 +75,9 @@
     자바스크립트에서는 추상 클래스를 명시적으로 제공하지 않지만, 이를 구현하기 위해 부모 클래스에 공통 메서드를 정의하고,
     자식 클래스에서 이를 재정의(오버라이딩) 할 수 있습니다.
     */
-    class Animal {
+    class Animal2 {
         constructor(name) {
-            if (this.constructor === Animal) {
+            if (this.constructor === Animal2) {
                 throw new Error("Abstract class 'Animal' cannot be instantiated directly.");
             }
             this.name = name;
@@ -88,29 +88,29 @@
         }
     }
 
-    class Cat extends Animal {
+    class Cat2 extends Animal2 {
         makeSound() {
             console.log(`${this.name} says: 야옹`);
         }
     }
 
-    class Dog extends Animal {
+    class Dog2 extends Animal2 {
         makeSound() {
             console.log(`${this.name} says: 멍멍`);
         }
     }
 
-    const cat = new Cat('고양이');
-    const dog = new Dog('강아지');
+    const cat = new Cat2('고양이');
+    const dog = new Dog2('강아지');
 
     cat.makeSound();    // 고양이 says: 야옹
-    Dog.makeSound();    // 강아지 says: 멍멍
+    dog.makeSound();    // 강아지 says: 멍멍
 
 // 5. 생성자 함수와 객체 생성
     /*
     생성자 함수는 객체를 초기화하는 역할을 하며, new키워드를 사용하여 호출됩니다.
     */
-    function Animal(name, sound) {
+    function Animal3(name, sound) {
         this.name = name;
         this.sound = sound;
 
@@ -119,14 +119,14 @@
         };
     }
 
-    const lion = new Animal('Lion', '어흥');
+    const lion = new Animal3('Lion', '어흥');
     lion.makeSound();   // Lion makes a sound: 어흥
 
 // 6. Getter와 Setter 메서드
     /*
         Getter와 Setter 메서드는 객체의 속성에 접근하고 수정하는 방법입니다.
     */
-    class Animal {
+    class Animal4 {
         constructor(name) {
             this._name = name;
         }
@@ -143,7 +143,7 @@
         }
     }
 
-    const cat1 = new Animal('고양이');
+    const cat1 = new Animal4('고양이');
     console.log(cat1.name); // 고양이
     cat.name = '냥이';
     console.log(cat.name);  // 냥이
@@ -200,7 +200,7 @@
 
 // 11. 커링(Currying)
     // 커링은 여러 개의 인자를 받는 함수를 단일 인자를 받는 함수의 연속으로 변환하는 기법입니다.
-    const makeAnimalSound = name => sound => `${species} makes a sound: ${sound}`;
+    const makeAnimalSound = name => sound => `${name} makes a sound: ${sound}`;
 
     const catSound = makeAnimalSound('고양이');
     console.log(catSound('야옹'));
@@ -210,12 +210,12 @@
 
 // 12. 함수 합성
     // 함수 합성은 여러 개의 함수를 결합하여 새로운 함수를 만드는 것입니다.
-    const add = x => x + 1;
+    const add1 = x => x + 1;
     const multiply = x => x * 2;
 
     const compose = (f,g) => x => f(g(x));
 
-    const addThenMultiply = compose(multiply, add);
+    const addThenMultiply = compose(multiply, add1);
     console.log(addThenMultiply(5));    // 12 (5 + 1 = 6, 6 * 2 = 12)
 
 // 13. 모나드의 저주
@@ -238,4 +238,92 @@
 
     console.log(factorial(5));  // 120
 
-// 15. 
+// 15. 객체 지향 프로그래밍과 함수형 프로그래밍 비교
+    /*
+    1. 객체 지향 프로그래밍(OOP)
+        - 특징 : 객체와 클래스 중심, 상태와 행동을 캡슐화
+        - 장점 : 코드 재사용성, 유지보수 용이
+        - 단점 : 복잡성 증가, 상속의 문제
+
+    2. 함수형 프로그래밍(FP)
+        - 특징 : 함수 중심, 상태 변화 최소화, 불변성 유지
+        - 장점 : 코드의 가독성과 유지보수성 향상
+        - 단점 : 성능 저하 가능성, 학습 곡선
+    */
+
+// 16. 오버라이딩과 오버로딩의 차이
+    // 오버라이딩 : 자식 클래스에서 부모 클래스의 메서드를 재정의하는 것.
+    class Animal5 {
+        speak() {
+            return '소리';
+        }
+    }
+
+    class Cat5 extends Animal5 {
+        speak() {
+            return '야옹';
+        }
+    }
+
+    const cat5 = new Cat5();
+    console.log(cat5.speak());   // 야옹
+
+// 17. 함수형 프로그래밍에서의 상태 관리
+    /*
+    함수형 프로그래밍에서 상태 관리는 불변성을 유지하고, 상태 변화를 최소화하는 방식으로 이루어집니다.
+    상태를 변경하는 대신 새로운 상태를 반화하는 방식을 사용합니다.
+    - 상태 변화를 최소화 하는 방법 :
+        1. 상태를 직접 숮어하지 않고 복사본을 만들기
+        2. 순수 함수만 사용하여 상태 변경을 제어하기
+        3. 고차 함수를 사용하여 상태 관리 로직을 재사용
+    */
+    const animal = { name : '고양이', sound: '야옹' };
+
+    const updateAnimal = (animal, newName) => {
+        return { ...animal, name: newName };    // 불변성 유지
+    };
+
+    const updatedAnimal = updateAnimal(animal, '애옹이');
+    console.log(updateAnimal);  // { name: '애옹이', sound: '야옹' }
+    console.log(animal);    // { name: '고양이', sound: '야옹' }
+
+// 18. 프로토타입 상속
+    // 자바스크립트에서 프로토타입 상속은 객체가 다른 객체의 속성과 메서드를 상속받는 방법입니다.
+    function Animal6(name) {
+        this.name = name;
+    }
+
+    Animal6.prototype.speak = function() {
+        return `${this.name}가 소리를 냅니다.`;
+    };
+
+    function Dog6(name) {
+        Animal6.call(this, name);    // 부모 생성자 호출
+    }
+
+    // 프로토타입 상속
+    Dog6.prototype = Object.create(Animal6.prototype);
+    Dog6.prototype.constructor = Dog6;
+
+    const dog1 = new Dog6('바둑이');
+    console.log(dog1.speak());   // 바둑이가 소리를 냅니다.
+
+// 19. Todo 리스트 함수형 프로그래밍 예제
+    let todos = [];
+
+    // 항목 추가
+    const addTodo = (todos, todo) => [...todos, todo];
+
+    // 항목 삭제
+    const removeTodo = (todos,todo) => todos.filter(t => t !== todo);
+
+    // 항목 완료 처리
+    const completeTodo = (todos,todo) => todos.map(t => t === todo ? `${t} (완료)` :t);
+
+    todos = addTodo(todos, '할 일1');
+    todos = addTodo(todos, '할 일2');
+    todos = addTodo(todos, '할 일3');
+    todos = completeTodo(todos, '할 일1');
+    todos = removeTodo(todos, '할 일2');
+
+    console.log(todos);
