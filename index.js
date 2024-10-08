@@ -138,7 +138,7 @@
             if (newName.length > 0) {
                 this._name = newName;
             } else {
-                console.log("유호하지 않습니다.");
+                console.log("유효하지 않습니다.");
             }
         }
     }
